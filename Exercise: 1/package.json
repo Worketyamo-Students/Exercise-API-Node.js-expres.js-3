@@ -1,8 +1,21 @@
 {
+  "name": "hervey",
+  "version": "1.0.0",
+  "description": "sfsdf",
+  "main": "App.js",
+  "type": "module",
+  "scripts": {
+    "start": "node App.js",
+    "dev": "nodemon App.js"
+  },
+  "author": "hervey",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0"
+  },
+  "keywords": [],
   "devDependencies": {
     "nodemon": "^3.1.10"
-  },
-  "dependencies": {
-    "express": "^5.1.0"
   }
 }

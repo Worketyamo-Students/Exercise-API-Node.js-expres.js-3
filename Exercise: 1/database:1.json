@@ -1,0 +1,39 @@
+[
+  {
+      "id": 1,
+      "Title": "Livre 1",
+      "Edition": "Edition 1",
+      "Author": "Auteur 1",
+      "Price": "10$"
+  },
+  {
+      "id": 2,
+      "Title": "Livre 2",
+      "Edition": "Edition 2",
+      "Author": "Auteur 2",
+      "Price": "15$"
+  },
+  {
+      "id": 3,
+      "Title": "Livre 3",
+      "Edition": "Edition 1",
+      "Author": "Auteur 1",
+      "Price": "12$"
+  },
+  {
+      "id": 4,
+      "Title": "Livre 4",
+      "Edition": "Edition 3",
+      "Author": "Auteur 3",
+      "Price": "20$"
+  },
+  {
+      "id": 5,
+      "Title": "Livre 5",
+      "Edition": "Edition 2",
+      "Author": "Auteur 4",
+      "Price": "8$"
+  }
+]
+
+

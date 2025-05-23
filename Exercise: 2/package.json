@@ -3,6 +3,19 @@
     "nodemon": "^3.1.10"
   },
   "dependencies": {
-    "express": "^5.1.0"
-  }
+    "body-parser": "^2.2.0",
+    "crypto": "^1.0.1",
+    "express": "^5.1.0",
+    "uuidv4": "^6.2.13"
+  },
+  "name": "exercise2",
+  "version": "1.0.0",
+  "description": "question 2",
+  "main": "App:2.js",
+  "type": "module",
+  "scripts": {
+    "start": "./node_modules/.bin/nodemon App:2.js"
+  },
+  "author": "herve",
+  "license": "ISC"
 }

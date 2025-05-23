@@ -1,0 +1,84 @@
+[
+    {
+      "nom": "Dupont",
+      "prenom": "Jean",
+      "telephone": {
+        "portable": "+33612345678",
+        "fixe": "+33123456789"
+      },
+      "email": "jean.dupont@example.com",
+      "adresse": {
+        "rue": "12 Rue de la Paix",
+        "ville": "Paris",
+        "codePostal": "75002",
+        "pays": "France"
+      },
+      "dateNaissance": "1985-04-15",
+      "notes": "Collègue de travail, très serviable."
+    },
+    {
+      "nom": "Martin",
+      "prenom": "Sophie",
+      "telephone": {
+        "portable": "+33798765432"
+      },
+      "email": "sophie.martin@example.com",
+      "adresse": {
+        "rue": "25 Avenue des Champs-Élysées",
+        "ville": "Paris",
+        "codePostal": "75008",
+        "pays": "France"
+      },
+      "dateNaissance": "1990-11-23",
+      "notes": "Amie d'enfance, à appeler pour le dîner."
+    },
+    {
+      "nom": "Lefebvre",
+      "prenom": "Marc",
+      "telephone": {
+        "portable": "+33655554433",
+        "fixe": "+33498765432"
+      },
+      "email": "marc.lefebvre@example.com",
+      "adresse": {
+        "rue": "3 Impasse des Rosiers",
+        "ville": "Lyon",
+        "codePostal": "69001",
+        "pays": "France"
+      },
+      "dateNaissance": "1978-07-01",
+      "notes": "Client important, suivi régulier."
+    },
+    {
+      "nom": "Bernard",
+      "prenom": "Nathalie",
+      "telephone": {
+        "portable": "+33699887766"
+      },
+      "email": "nathalie.bernard@example.com",
+      "adresse": {
+        "rue": "7 Boulevard de la Liberté",
+        "ville": "Marseille",
+        "codePostal": "13007",
+        "pays": "France"
+      },
+      "dateNaissance": "1992-02-29",
+      "notes": "Responsable marketing, contact pour le projet X."
+    },
+    {
+      "nom": "Petit",
+      "prenom": "Thomas",
+      "telephone": {
+        "portable": "+33611223344"
+      },
+      "email": "thomas.petit@example.com",
+      "adresse": {
+        "rue": "9 Place du Capitole",
+        "ville": "Toulouse",
+        "codePostal": "31000",
+        "pays": "France"
+      },
+      "dateNaissance": "1980-09-10",
+      "notes": "Ancien professeur d'université."
+    }
+  ]
