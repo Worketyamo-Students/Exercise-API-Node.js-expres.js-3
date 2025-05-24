@@ -3,6 +3,8 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import path from "path"
 import fs from "fs"
+import os from "node:os"
+import { freemem, totalmem } from "os";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -15,14 +17,31 @@ const CSV_DB_PATH = path.join(__dirname, 'database:2.csv');
 
 const Controller = {
 
-        getAll_user : (req,res) =>{
-                fs.readFile("./database:2.json", "utf-8",(err,data) =>{
+         getAll_user : (req,res) =>{
+                fs.readFile(JSON_DB_PATH, "utf-8",(err,data) =>{
+                        const tempdata = data;
                         if(err){
                                 res.status(400).json({msg:"error while reading file"});
                         }else{
                                const tempdata = JSON.parse(data);
                                res.status(200).json(tempdata); 
                         }
+                });
+         },
+         getStatus : (req,res) =>{
+                fs.readFile (JSON_DB_PATH,"utf-8",(err,data)=>{
+                        if(err) return res.status(400).send("Erreur lors de la lecture des contact")
+
+                        const madata = JSON.parse(data);
+                        const status = {
+                                Contacts : madata.length,
+                                Type_of_Os : os.type(),
+                                type_Architecture: os.arch(),
+                                number_of_processor : os.cpus(),
+                                Total_memory : totalmem() ,
+                                Free_space : freemem()
+                        }
+                        res.status(200).json({msg:{"Here are some infos about they system + contacts":status}})
                 });
          },
          Getuser_By_Id : (req,res) =>{
@@ -44,7 +63,7 @@ const Controller = {
             }
               });
          },
-        Create_User : (req,res) =>{
+         Create_User : (req,res) =>{
                 const {nom,prenom,telephone,email,addresse,dateNaissance,note} = req.body;
                 if(!nom || !prenom || !telephone || !addresse || !dateNaissance || !note){
                         console.log("inserez tout les champs");
@@ -140,22 +159,73 @@ const Controller = {
             // Iterate through the updated contacts array to create CSV lines
             donnecourant.forEach(livinguser => {
                 // Ensure all fields are present, using empty string for optional ones if null
-                const safeEmail = contact.email || '';
-                const safeNotes = contact.notes || '';
+                const safeEmail = livinguser.email || '';
+                const safeNotes = livinguser.notes || '';
+                const safeTelephone = livinguser.telephone;
+                const safeAdresse = livinguser.adresse;
                 // Assuming telephone and adresse are strings. Adjust if they are objects.
-                // const safeTelephone = typeof contact.telephone === 'object' ? JSON.stringify(contact.telephone) : contact.telephone;
-                // const safeAdresse = typeof contact.adresse === 'object' ? JSON.stringify(contact.adresse) : contact.adresse;
+                // const safeTelephone = typeof livinguser.telephone === 'object' ? JSON.stringify(livinguser.telephone) : livinguser.telephone;
+                // const safeAdresse = typeof livinguser.adresse === 'object' ? JSON.stringify(livinguser.adresse) : livinguser.adresse;
 
-
-                // csvContent += `"${contact.id}","${contact.prenom}","${contact.nom}","${safeTelephone}","${safeEmail}","${safeAdresse}","${contact.dateNaissance}","${safeNotes}"\n`;
+                 csvContent += `"${livinguser.id}","${livinguser.prenom}","${livinguser.nom}","${safeTelephone}","${safeEmail}","${safeAdresse}","${livinguser.dateNaissance}","${safeNotes}"\n`;
             });
 
-            // Overwrite the CSV file with the new complete content
-        //     fs.writeFile(CSV_DB_PATH, csvContent, (writeCsvErr) => {
-                });
+            fs.writeFile(CSV_DB_PATH, csvContent, (err) => {
+                if (err) {
+                        console.error("Error writing updated CSV file:", err);
+                        return res.status(500).json({ message: "Erreur serveur lors de l'écriture des données CSV mises à jour." });
+                    }
+                    console.log("CSV file successfully re-generated.");
+    
+                    return res.status(200).json({ message: "Utilisateur mis à jour avec succès !", user: update_user});
+               });
+            });
 
          })
          },
+         Delete_userBy_id : (req,res) =>{
+                const userId = req.params.id;
+              fs.readFile(JSON_DB_PATH ,"utf-8" ,(err,data)=>{
+                const donnecourant = JSON.parse(data);
+                const foundUser = donnecourant.find(livinguser => livinguser.id === userId);
+                if(foundUser===-1){
+                        console.log(`they user with id:${userId} was not found`);
+                        return res.send(`user with id ${userId} not found`) ;
+                };
+                const deletedUser = donnecourant.splice(foundUser, 1)[0]; 
+                console.log("User deleted from memory:", deletedUser);
+                fs.writeFile(JSON_DB_PATH,JSON.stringify(donnecourant,null,2),"utf-8", (err)=>{
+                        if(err){
+                              console.log("Error while updating in Json file");
+                             return res.status(500).send("Error while updating in Json file");
+                        }
+                        let csvContent = "id,prenom,nom,telephone,email,adresse,dateNaissance,notes\n"; // CSV Headers
+      
+                  // Iterate through the updated contacts array to create CSV lines
+                  donnecourant.forEach(livinguser => {
+                      // Ensure all fields are present, using empty string for optional ones if null
+                      const safeEmail = livinguser.email || '';
+                      const safeNotes = livinguser.notes || '';
+                      const safeTelephone = livinguser.telephone;
+                      const safeAdresse = livinguser.adresse;
+                       csvContent += `"${livinguser.id}","${livinguser.prenom}","${livinguser.nom}","${safeTelephone}","${safeEmail}","${safeAdresse}","${livinguser.dateNaissance}","${safeNotes}"\n`;
+                  });
+      
+                  fs.writeFile(CSV_DB_PATH, csvContent, (err) => {
+                      if (err) {
+                              console.error("Error writing updated CSV file:", err);
+                              return res.status(500).json({ message: "Erreur serveur lors de l'écriture des données CSV mises à jour." });
+                          }
+                          console.log("CSV file successfully re-generated.");
+          
+                          return res.status(200).json({ message: "Utilisateur mis à jour avec succès ! apres suppression", deleted_user:deletedUser});
+                     });
+                  });
+              })
+                
+
+         }
+   
 }
 
 export default Controller;

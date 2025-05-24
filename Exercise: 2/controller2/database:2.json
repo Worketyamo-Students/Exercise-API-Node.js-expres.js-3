@@ -1,25 +1,5 @@
 [
   {
-    "id": "f2107886-c34f-4da6-b911-47ea0da62f6d",
-    "nom": "laravel",
-    "prenom": "apache",
-    "email": "laravel.apache@example.com",
-    "telephone": "+399343845654",
-    "addresse": "25 Avenue des Champs-mendong",
-    "dateNaissance": "1999-02-13",
-    "note": "Amie d'enfance, à appeler pour le dîner."
-  },
-  {
-    "id": "ffbc2a59-9dd4-46c1-85e0-e5f474908036",
-    "nom": "laravel",
-    "prenom": "apache",
-    "email": "laravel.apache@example.com",
-    "telephone": "+399343845654",
-    "addresse": "25 Avenue des Champs-mendong",
-    "dateNaissance": "1999-02-13",
-    "note": "Amie d'enfance, à appeler pour le dîner."
-  },
-  {
     "id": "9a5ef41f-f0ad-43dc-8a24-54ff654d8334",
     "nom": "laravel",
     "prenom": "apache",
